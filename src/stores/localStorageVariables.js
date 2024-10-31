@@ -37,3 +37,18 @@ export function setProfile (res) {
     role.setValue(res.role)
   }
 }
+
+export const setToken = (token) =>{
+  localStorage.setItem('token',token)
+
+}
+export const setRole = (role) =>{
+localStorage.setItem('role',role)
+}
+export const getToken = () =>{
+  return localStorage.getItem('token')
+
+}
+export const getRole = () =>{
+return localStorage.getItem('role')
+}

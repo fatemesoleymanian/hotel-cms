@@ -1,6 +1,8 @@
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
+import { getRole, getToken } from 'src/stores/localStorageVariables'
+import { useQuasar } from 'quasar'
 
 /*
  * If not building with SSR mode, you can
@@ -25,6 +27,46 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
+  Router.beforeEach((to, from, next) => {
+    const role = getRole()
+    const token = getToken()
+    const needsAuth = to.meta.needsAuth
+    const access = to.meta.role
+    const $q = useQuasar()
 
+    // console.error('role: '+role)
+    // console.error('token: '+token)
+    // console.error('needsAuth: '+needsAuth)
+    // console.error('access: '+access)
+
+    if(needsAuth === undefined) next()
+    else {
+      if (token == null) {
+        console.error('Unauthorized access!')
+        $q.notify({
+          timeout: 4000,
+          progress: true,
+          message: 'لطفا وارد حساب کاربری خود شوید.',
+          type: 'negative',
+          classes: 'h4 font-medium'
+        })
+        next('/')
+
+      } else{
+        if(role === access) next()
+          else{
+            console.error('unable access!')
+            $q.notify({
+              timeout: 4000,
+              progress: true,
+              message: 'عدم دسترسی به صفحه موردنظر!',
+              type: 'negative',
+              classes: 'h4 font-medium'
+            })
+            next('/')
+        }
+        }
+  }
+  })
   return Router
 })

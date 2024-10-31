@@ -31,31 +31,47 @@ const routes = [
       { path: 'post/:slug', component: () => import('pages/BlogPost.vue'),
         meta:{
           title:'پست وبلاگ',
-          description:''
-        }
-       },
-      { path: 'login-signup', component: () => import('pages/LoginSignup.vue'),
-        meta:{
-          title:'ورود/ ثبت نام',
-          description:''
+          description:'',
         }
        },
        { path: 'reserves', component: () => import('pages/HotelReserves.vue'),
         meta:{
           title:'رزروهای من',
-          description:''
+          description:'',
+           needsAuth:true,
+          role:'user'
         }
        },
       { path: 'booking-1', component: () => import('pages/BookingFirstStep.vue'),
         meta:{
           title:'رزرو آنلاین',
-          description:''
+          description:'',
+          needsAuth:true,
+          role:'user'
         }
        },
       { path: 'booking-2', component: () => import('pages/BookingSecondStep.vue'),
         meta:{
           title:'رزروآنلاین',
-          description:''
+          description:'',
+           needsAuth:true,
+          role:'user'
+        }
+       },
+       { path: 'settings', component: () => import('pages/TemplateSettings.vue'),
+        meta:{
+          title:'تنظیمات قالب',
+          description:'',
+           needsAuth:true,
+          role:'admin'
+        }
+       },
+       { path: 'voucher/:reserve_id', component: () => import('pages/ReserveVoucher.vue'),
+        meta:{
+          title:'ووچر',
+          description:'',
+          needsAuth:true,
+          role:'user'
         }
        },
     ]

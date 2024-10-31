@@ -5,14 +5,14 @@
         404
       </div>
 
-      <div class="text-h2" style="opacity:.4">
+      <div class="text-h2">
         صفحه موردنظر پیدانشد!
       </div>
 
       <q-btn
         class="q-mt-xl"
-        color="white"
-        text-color="primary"
+        color="primary"
+        text-color="white"
         unelevated
         to="/"
         label="بازگشت به صفحه اصلی"

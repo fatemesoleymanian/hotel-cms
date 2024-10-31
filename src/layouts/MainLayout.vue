@@ -4,9 +4,9 @@
     <q-header class="shadow-md border-b border-gray-200 no-shadow border-none" :class="headerClass">
       <q-toolbar class="flex justify-between items-center px-4 md:px-8" >
         <!-- Logo -->
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-4 cursor-pointer" @click="this.$router.push('/')">
           <img src="https://www.logodesign.net/logo/city-inside-shield-1950ld.png?nwm=1&nws=1&industry=hotel&sf=&txt_keyword=All"
-          alt="Hotel Logo" class="h-8 md:h-10" /> <!-- Replace with actual logo path -->
+          alt="Hotel Logo" class="h-8 md:h-10"  /> <!-- Replace with actual logo path -->
           <q-toolbar-title class="text-lg font-bold text-gray-800">نام هتل</q-toolbar-title>
         </div>
 
@@ -25,38 +25,36 @@
 
         </div>
         <q-btn label="رزرو آنلاین" color="primary" class="md:hidden" />
-        <q-btn-dropdown unelevated flat round dense icon="account_circle" color="primary" v-if="verifiedUser">
+        <q-btn-dropdown dense rounded outline icon="account_circle" color="primary" v-if="tokenIsSet">
           <q-list>
-            <q-item clickable @click="goToProfile" >
+            <q-item clickable @click="this.$router.push('/settings')" v-if="role === 'admin'">
               <q-item-section avatar>
-                <q-icon name="r_account_circle" color="primary" />
+                <q-icon name="settings" color="primary" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>تنظیمات</q-item-label>
-                <q-item-label caption></q-item-label>
               </q-item-section>
             </q-item>
-            <q-item clickable @click="goToProfile" >
+            <q-item clickable @click="this.$router.push('/reserves')" v-else>
               <q-item-section avatar>
-                <q-icon name="r_account_circle" color="primary" />
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>پروفایل کاربری</q-item-label>
-                <q-item-label caption></q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item clickable @click="goToProfile" >
-              <q-item-section avatar>
-                <q-icon name="r_account_circle" color="primary" />
+                <q-icon name="luggage" color="primary" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>رزروهای من</q-item-label>
-                <q-item-label caption></q-item-label>
               </q-item-section>
             </q-item>
+            <!-- <q-item clickable @click="this.$router.push('/dashboard')" >
+              <q-item-section avatar>
+                <q-icon name="account_circle" color="primary" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>پروفایل کاربری</q-item-label>
+              </q-item-section>
+            </q-item> -->
+
             <q-item clickable @click="exitHotel">
               <q-item-section avatar>
-                <q-icon name="r_logout" color="primary" />
+                <q-icon name="logout" color="primary" />
               </q-item-section>
               <q-item-section>
                 <q-item-label>خروج</q-item-label>
@@ -64,7 +62,8 @@
             </q-item>
         </q-list>
         </q-btn-dropdown>
-        <q-btn class="font-semibold" label="ورود / ثبت نام" color="primary" flat v-else @click="this.$router.push('/login-signup')"/>
+        <q-btn class="font-semibold" label="ورود / ثبت نام" color="primary" v-else
+          @click="loginFormDialog =! loginFormDialog" outline/>
         <!-- Mobile Menu Button -->
         <q-btn
           flat
@@ -134,7 +133,6 @@
           <a href="/rooms">اتاق ها</a>
           <a href="/about">معرفی هتل</a>
           <a href="/blog">وبلاگ</a>
-          <!-- <a href="/login-signup">ورود / ثبت نام</a> -->
         </div>
       </div>
 
@@ -148,18 +146,24 @@
       </div>
     </div>
   </q-footer>
+  <q-dialog v-model="loginFormDialog" position="top">
+    <LoginSignupForm @on-close="enterHotel"/>
+  </q-dialog>
   </q-layout>
 </template>
 
 <script>
 import { useQuasar } from "quasar";
+import LoginSignupForm from "src/components/LoginSignupForm.vue";
+import { getRole, getToken, role } from "src/stores/localStorageVariables";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 
 export default {
   name: "MainLayout",
   setup() {
-    const verifiedUser = localStorage.getItem('token')
+    const tokenIsSet = getToken()
+    const role = getRole()
     const leftDrawerOpen = ref(false);
     const toggleLeftDrawer = () => {
       leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -195,7 +199,8 @@ export default {
       }
     ]
     return {
-      verifiedUser,
+      tokenIsSet,
+      loginFormDialog: ref(false),
       $q: useQuasar(),
       leftDrawerOpen,
       navLinks,
@@ -209,6 +214,14 @@ export default {
     const $q = useQuasar()
   },
   methods:{
+    exitHotel(){
+      localStorage.clear()
+      window.location.reload()
+    },
+    enterHotel(){
+      this.loginFormDialog = false;
+      window.location.reload()
+    },
     isActive(item){
       return this.currentRoute === item ? ' text-secondary font-bold underline decoration-2 underline-offset-4' : ''
     },
@@ -229,6 +242,9 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.onScroll);
+  },
+  components:{
+    LoginSignupForm
   }
 };
 </script>
