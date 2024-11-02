@@ -1,6 +1,17 @@
 <template>
-  <q-page class="flex flex-center bg-accent" >
-    <div class="q-py-md q-px-sm " style="margin-top: 80px!important;">
+  <q-page class="flex flex-center bg-white" >
+    <transition
+      appear
+      enter-active-class="animated fadeInRightBig slower"
+      leave-active-class="animated fadeInLeftBig slower">
+        <div class="w-full m-0 h-1/2 q-pa-none full-width mb-4">
+          <img src="https://hoteldel.com/wp-content/uploads/2021/03/beach_village_2303_villa_oceanview_living_room_rbenson_2023_K1LOS_K1LOS2_2500x1100.jpg"
+          class="w-full h-1/2 m-0 q-pa-none full-width"
+          alt="Hotel Logo" />
+        </div>
+    </transition>
+
+    <div class="q-py-md q-px-sm ">
     <q-table
       title="رزروهای من"
       :rows="rows"
@@ -8,7 +19,7 @@
        bordered
        @on-db-click="onViewDetails"
       separator="cell"
-      card-class="border-2 border-dark bg-transparent text-black"
+      card-class="border-2 border-dark bg-accent text-black"
       row-key="name"
     />
   </div>

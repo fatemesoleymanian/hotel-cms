@@ -42,19 +42,11 @@ const routes = [
           role:'user'
         }
        },
-      { path: 'booking-1', component: () => import('pages/BookingFirstStep.vue'),
+      { path: 'book', component: () => import('src/pages/BookingSteps.vue'),
         meta:{
           title:'رزرو آنلاین',
           description:'',
           needsAuth:true,
-          role:'user'
-        }
-       },
-      { path: 'booking-2', component: () => import('pages/BookingSecondStep.vue'),
-        meta:{
-          title:'رزروآنلاین',
-          description:'',
-           needsAuth:true,
           role:'user'
         }
        },
