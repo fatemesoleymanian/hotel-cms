@@ -165,8 +165,9 @@ export default defineComponent({
  }
  },
  methods:{
-  onViewDetails(){
+  onViewDetails(id){
     alert('nn')
+    window.location.href =  `voucher/${id}`
   }
  }
 })
