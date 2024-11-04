@@ -26,7 +26,7 @@
           <q-img class="rounded-borders col-6 full-height" :src="item.imgs[index]" />
           <q-img class="rounded-borders col-6 full-height" :src="item.imgs[index]" />
         </div>
-        <div class="q-mt-md text-center bg-black rounded-borders q-py-md q-px-xl"
+        <div class="q-mt-md text-center bg-dark rounded-borders q-py-md q-px-xl"
           style="margin-top: auto;" v-else>
           <a :href="item.link" target="_blank" class="text-white">
             {{ item.text }}

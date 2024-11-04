@@ -1,3 +1,4 @@
+
 /* // Quasar SCSS (& Sass) Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
@@ -13,26 +14,26 @@
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
 // required */
-/* $primary   : #1976D2;
-$secondary : #6ecfe2;
-$accent    : #abdfe9;
-$dark      : #374151; */
+$primary: #1976d2;
+$secondary: #424242;
+$accent:#abdfe9;
+$dark:#374151;
 
 /* //optional */
-/* $dark-page : #121212;
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #abdfe9;
-$warning   : #F2C037; */
+ $dark-page:#121212;
+$positive:#21BA45;
+ $negative:#C10015;
+ $info:#abdfe9;
+ $warning:#F2C037;
 
-:root {
-  --primary: #1976D2;
-  --secondary: #6ecfe2;
-  --accent: #abdfe9;
-  --dark: #374151;
-  --dark-page: #121212;
-  --positive: #21BA45;
-  --negative: #C10015;
-  --info: #abdfe9;
-  --warning: #F2C037;
-}
+// :root {
+//   --primary: #1976D2;
+//   --secondary: #6ecfe2;
+//   --accent: #abdfe9;
+//   --dark: #374151;
+//   --dark-page: #121212;
+//   --positive: #21BA45;
+//   --negative: #C10015;
+//   --info: #abdfe9;
+//   --warning: #F2C037;
+// }

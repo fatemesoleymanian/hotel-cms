@@ -1,10 +1,20 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-6">رنگ primary :</div>
-      <div class="col-6">
-         <q-color v-model="hex" class="my-picker" @update:model-value="onChangeColors($event,'primary')"/>
+    <transition
+      appear
+      enter-active-class="animated fadeInRightBig slower"
+      leave-active-class="animated fadeInLeftBig slower">
+        <div class="w-full object-cover h-[500px]">
+          <img src="https://hoteldel.com/wp-content/uploads/2021/03/beach_village_2303_villa_oceanview_living_room_rbenson_2023_K1LOS_K1LOS2_2500x1100.jpg"
+          class="w-full object-cover h-[500px]"
+          alt="Hotel Logo" />
+        </div>
+    </transition>
+    <div class="row bg-white mx-4 mb-8" style="margin-top: -100px;">
+      <div class="col-12">
+        <color-changer />
       </div>
+      <hr>
     </div>
 <!-- pallette
 font-family
@@ -20,13 +30,15 @@ instagram
 </div>
 </template>
 <script>
-import { updateThemeColor } from 'src/stores/settings';
+import ColorChanger from 'src/components/settings/Color-Changer.vue';
 
 export default{
+  components:{
+    ColorChanger
+  },
   methods:{
 onChangeColors(color,variable){
-  updateThemeColor(variable,color)
-}
+ }
   }
 }
 </script>

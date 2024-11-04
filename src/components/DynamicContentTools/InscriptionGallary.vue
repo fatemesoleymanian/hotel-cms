@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery-container bg-black">
+  <div class="gallery-container bg-dark">
     <!-- Header Title -->
     <h1 class="text-right text-white text-3xl font-bold pt-8 mr-8">{{ headerText }}</h1>
 
@@ -26,7 +26,7 @@
        control-color="primary"
       thumbnails
       infinite
-       class="mt-4 bg-black text-white flex justify-center items-center"
+       class="mt-4 bg-dark text-white flex justify-center items-center"
     >
       <q-carousel-slide v-for="(slideGroup, groupIndex) in getSlidesByTab(activeTab)"
         :key="groupIndex"
